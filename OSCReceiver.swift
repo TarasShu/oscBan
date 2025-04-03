@@ -12,9 +12,7 @@ import Foundation
 import OSCKit
 import SwiftyCreatives
 
-/// OSC receiver.
-/// Registers local OSC addresses that our app is capable of recognizing and
-/// handles received bundles & messages.
+
 final class OSCReceiver: Sendable {
     private let addressSpace = OSCAddressSpace()
     private var sample: Sample?
@@ -33,16 +31,13 @@ final class OSCReceiver: Sendable {
     private func handleScreenBrightness(values: OSCValues, host: String, port: UInt16) {
             guard let value = values.first as? Float else { return }
             let normalized = value / 255.0
-//            print("handleScreenBrightness: \(normalized)")
-        
-        
-        
-        
+
+                        
         
             DispatchQueue.main.async {
                 print(" as handleScreenBrightness \(normalized)")
                 
-                self.sample?.dt = normalized
+//                self.sample?.dt = normalized
                 Sample.dynamicColor = f4(normalized / 10.0, normalized / 10.5, normalized / 10.0, 0.6)
             }
         
@@ -59,7 +54,7 @@ final class OSCReceiver: Sendable {
             DispatchQueue.main.async {
                 print(" as handleScreenBrightness \(value)")
                 
-                self.sample?.dt = normalized
+//                self.sample?.dt = normalized
                 Sample.ampl = normalized
             }
 

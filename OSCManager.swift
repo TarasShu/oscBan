@@ -33,7 +33,7 @@ final class OSCManager: ObservableObject {
 // MARK: - Lifecycle
 
 extension OSCManager {
-    /// Call this once on app launch.
+    
     func start() {
         do {
             guard socket == nil else { return }

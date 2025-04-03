@@ -30,9 +30,7 @@ struct ContentView: View {
 final class Sample: Sketch {
     var oscManager: OSCManager?
 
-    
-//     var c = f4(1, 0.5, 1, 1)
-     var dt: Float = 0.01
+
     static  var ampl: Float = 0.001
     static var dynamicColor: f4 = f4(1, 0.5, 1, 1)
     
@@ -42,7 +40,9 @@ final class Sample: Sketch {
     
     
     override func update(camera: MainCamera) {
-        camera.rotateAroundY(0.01)
+        let angle = Sample.dynamicColor.y * 0.1 // scale as needed
+
+        camera.rotateAroundY(angle)
     }
     
     
