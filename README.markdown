@@ -15,6 +15,6 @@ function send_osc(path, args)
 end
 
 function sndOscMac(x)
-    send_osc("/adrs", {x}) -- Установка позиции
+    send_osc("/adrs", {x})
 end
 
