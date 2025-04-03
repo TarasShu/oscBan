@@ -53,7 +53,17 @@ final class OSCReceiver: Sendable {
 
     private func handleAmpl(values: OSCValues, host: String, port: UInt16) {
             guard let value = values.first as? Float else { return }
+            let normalized = value
             print("handleAmpl: \(value)")
+            
+            DispatchQueue.main.async {
+                print(" as handleScreenBrightness \(value)")
+                
+                self.sample?.dt = normalized
+                Sample.ampl = normalized
+            }
+
+            
 
             
         }
