@@ -10,6 +10,7 @@
 
 import Foundation
 import OSCKit
+import SwiftyCreatives
 
 /// OSC receiver.
 /// Registers local OSC addresses that our app is capable of recognizing and
@@ -32,20 +33,29 @@ final class OSCReceiver: Sendable {
     private func handleScreenBrightness(values: OSCValues, host: String, port: UInt16) {
             guard let value = values.first as? Float else { return }
             let normalized = value / 255.0
-            print("handleScreenBrightness: \(normalized)")
-
-            Task { @MainActor in
+//            print("handleScreenBrightness: \(normalized)")
+        
+        
+        
+        
+        
+            DispatchQueue.main.async {
+                print(" as handleScreenBrightness \(normalized)")
+                
                 self.sample?.dt = normalized
+                Sample.dynamicColor = f4(normalized / 10.0, normalized / 10.5, normalized / 10.0, 0.6)
             }
+        
+        
+
+            
         }
 
     private func handleAmpl(values: OSCValues, host: String, port: UInt16) {
             guard let value = values.first as? Float else { return }
             print("handleAmpl: \(value)")
 
-            Task { @MainActor in
-                self.sample?.diffusion = value
-            }
+            
         }
 
     private func handleAnalysis(values: OSCValues, host: String, port: UInt16) {
@@ -59,7 +69,7 @@ final class OSCReceiver: Sendable {
     }
 
     public func handle(message: OSCMessage, timeTag: OSCTimeTag, host: String, port: UInt16) throws {
-        print("Incoming address: \(message)") // 👈
+        
         let methodIDs = addressSpace.dispatch(message: message, host: host, port: port)
         
         if methodIDs.isEmpty {

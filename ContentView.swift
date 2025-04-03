@@ -26,7 +26,7 @@ struct ContentView: View {
     }
 }
 
-@MainActor
+
 final class Sample: Sketch {
     var oscManager: OSCManager?
 //    var receiver: OSCReceiver?
@@ -34,6 +34,7 @@ final class Sample: Sketch {
      var c = f4(1, 0.5, 1, 1)
      var dt: Float = 0.01
      var diffusion: Float = 0.001
+    static var dynamicColor: f4 = f4(1, 0.5, 1, 1)
     
     init(oscManager: OSCManager? = nil) {
         
@@ -51,7 +52,7 @@ final class Sample: Sketch {
     override func draw(encoder: SCEncoder) {
         
 
-        color(f4(1, 0.5, 1, 1))
+        color(Sample.dynamicColor)
         box(f3.one * 5)
     }
 }
